@@ -1,0 +1,16 @@
+package com.hackathon.myapplication
+
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+
+object Client {
+    private val gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
+
+    private val retrofit = Retrofit.Builder().baseUrl("https://owlbot.info/api/v4/dictionary/")
+        .addConverterFactory(GsonConverterFactory.create(gson)).build()
+
+    val api = retrofit.create(GithubService::class.java)
+}
